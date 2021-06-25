@@ -4,7 +4,7 @@ import logoImg from '../assets/images/logo.svg'
 import googleIconImg from '../assets/images/google-icon.svg'
 import { Button } from '../components/Button'
 import '../styles/auth.scss'
-import { useAuth } from '../hooks/UseAuth'
+import { useAuth } from '../hooks/useAuth'
 import { FormEvent, useState } from 'react'
 import { database } from '../services/firebase'
 
@@ -32,6 +32,11 @@ export function Home() {
 
         if (!roomRef.exists()) {
             alert('Room does not exist')
+            return;
+        }
+
+        if (roomRef.val().endedAt) {
+            alert('Room already closed')
             return;
         }
 
